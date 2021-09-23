@@ -15,14 +15,12 @@
         android:background="#D1D2D3"
         tools:context=".ui.NewsFragment">
 
-        <EditText
-            android:id="@+id/edit_text"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Search"
-            android:padding="10dp"
-            android:drawableLeft="@drawable/ic_search"
+            app:searchIcon="@drawable/ic_search"
             android:background="@drawable/search_bg"
             app:layout_constraintBottom_toTopOf="@id/recycler_view"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +36,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_text"
+            app:layout_constraintTop_toBottomOf="@id/search_view"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/layout_news_item"
             android:clipToPadding="false"/>

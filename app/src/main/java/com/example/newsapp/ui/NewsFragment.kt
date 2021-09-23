@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -42,14 +44,15 @@ class NewsFragment : Fragment() {
             adapter.setData(it)
             adapter.notifyDataSetChanged()
         })
+        binding.searchView.setOnQueryTextListener(object :androidx.appcompat.widget.SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                adapter.filter?.filter(query.toString())
+                return false
+            }
 
-        binding.editText.addTextChangedListener(object :TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                adapter.filter?.filter(s.toString())
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter?.filter(newText.toString())
+                return false
             }
         })
         return binding.root
