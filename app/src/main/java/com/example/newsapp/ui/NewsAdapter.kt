@@ -11,7 +11,52 @@ import com.example.newsapp.databinding.LayoutNewsItemBinding
 import com.example.newsapp.model.Article
 import java.util.*
 import kotlin.collections.ArrayList
+
 class NewsAdapter(val onItemClick: (Article)->Unit)
+    :ListAdapter<Article,NewsAdapter.NewsViewHolder>(DiffUtilCallBacks){
+    companion object DiffUtilCallBacks:DiffUtil.ItemCallback<Article>(){
+        override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
+            return false
+        }
+
+        override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
+            return false
+        }
+
+    }
+    class NewsViewHolder(private var binding: LayoutNewsItemBinding)
+        :RecyclerView.ViewHolder(binding.root){
+        fun bind(item:Article){
+            binding.item=item
+            binding.executePendingBindings()
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
+        return NewsViewHolder(LayoutNewsItemBinding.inflate(LayoutInflater.from(parent.context)))
+
+    }
+
+    override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
+        holder.bind(getItem(position))
+        holder.itemView.setOnClickListener {
+            onItemClick(getItem(position))
+        }
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/*class NewsAdapter(val onItemClick: (Article)->Unit)
     :RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() , Filterable{
     var articleList:List<Article> = listOf()
     var articleFilteredList:List<Article> = listOf()
@@ -78,7 +123,7 @@ class NewsAdapter(val onItemClick: (Article)->Unit)
     }
 
 
-}
+}*/
 
 
 

@@ -40,18 +40,16 @@ class NewsFragment : Fragment() {
 
         binding.recyclerView.adapter = adapter
 
-        viewModel.article.observe(requireActivity(), Observer {
-            adapter.setData(it)
-            adapter.notifyDataSetChanged()
-        })
         binding.searchView.setOnQueryTextListener(object :androidx.appcompat.widget.SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
-                adapter.filter?.filter(query.toString())
+                //adapter.filter?.filter(query.toString())
+                viewModel.selectedString.value=query
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                adapter.filter?.filter(newText.toString())
+                //adapter.filter?.filter(newText.toString())
+                viewModel.selectedString.value=newText
                 return false
             }
         })
